@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    body { margin: 0; -webkit-font-smoothing: antialiased; }
+    a { color: #0056B3; text-decoration: none; }
+    a:hover { color: #003D82; text-decoration: underline; }
+    input::placeholder, textarea::placeholder { color: #9AA3AC; }
+  </style>
+</helmet>
+<div style="font-family: Inter, -apple-system, sans-serif; background: #FFFFFF; color: #1A1A1A; min-height: 100vh; display: flex; flex-direction: column;">
+
+  <header style="position: sticky; top: 0; z-index: 20; background: rgba(255,255,255,0.92); backdrop-filter: blur(8px); border-bottom: 1px solid #E9ECEF; display: flex; align-items: center; justify-content: space-between; padding: 0 40px; height: 66px; gap: 24px;">
+    <div style="display: flex; align-items: center; gap: 36px;">
+      <div onClick="{{ goHome }}" style="display: flex; align-items: center; gap: 11px; cursor: pointer;">
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" style="flex-shrink: 0;">
+          <defs><linearGradient id="ahg-hdr" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#2E8BF0"/><stop offset="1" stop-color="#0052AD"/></linearGradient></defs>
+          <rect width="40" height="40" rx="11" fill="url(#ahg-hdr)"/>
+          <path d="M20 8.5 L29.5 31.5 M20 8.5 L10.5 31.5" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round"/>
+          <path d="M13.6 23.4 H16.4 L18.2 19.6 L21 27 L22.8 23.4 H26.4" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span style="font-weight: 800; font-size: 19px; letter-spacing: -0.02em; color: #0A2540;">Attending<span style="color: #0056B3; font-weight: 700;"> Health</span></span>
+      </div>
+      <nav style="display: flex; align-items: center; gap: 22px;">
+        <span onClick="{{ goArticle }}" style="font-size: 14px; font-weight: 500; cursor: pointer; color: {{ navArticleColor }};">Sample Article</span>
+        <span onClick="{{ goForum }}" style="font-size: 14px; font-weight: 500; cursor: pointer; color: {{ navForumColor }};">Discussions</span>
+        <span style="font-size: 14px; font-weight: 500; color: #6B7280;">Calculators</span>
+      </nav>
+    </div>
+    <div style="display: flex; align-items: center; gap: 16px;">
+      <div style="display: flex; align-items: center; gap: 8px; background: #F4F6F8; border: 1px solid #E9ECEF; border-radius: 8px; padding: 8px 12px; width: 240px;">
+        <div style="width: 13px; height: 13px; border: 1.5px solid #9AA3AC; border-radius: 50%; flex-shrink: 0; position: relative;"><div style="position:absolute; width:6px; height:1.5px; background:#9AA3AC; transform: rotate(45deg); top: 11px; left: 9px;"></div></div>
+        <input placeholder="Search a topic or drug…" style="border: none; background: transparent; outline: none; font-size: 13px; font-family: Inter, sans-serif; color: #1A1A1A; width: 100%;" />
+      </div>
+      <span style="font-size: 14px; font-weight: 600; color: #FFFFFF; background: #0056B3; padding: 8px 20px; border-radius: 8px; cursor: pointer; white-space: nowrap;">Log in</span>
+    </div>
+  </header>
+
+  <main style="flex: 1;">
+
+  <sc-if value="{{ isHome }}" hint-placeholder-val="{{ true }}">
+    <div style="background: linear-gradient(180deg, #E4F0FB 0%, #F2F8FD 55%, #FFFFFF 100%); border-bottom: 1px solid #E4EEF7;">
+    <section style="max-width: 760px; margin: 0 auto; padding: 80px 24px 36px; text-align: center;">
+      <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #0056B3; text-transform: uppercase; margin-bottom: 18px;">Clinical Reference · Evidence-Based</div>
+      <h1 style="font-size: 48px; font-weight: 800; letter-spacing: -0.03em; margin: 0 0 14px; line-height: 1.08;">Ask a clinical question.</h1>
+      <p style="font-size: 17px; color: #5B6572; margin: 0 0 38px; line-height: 1.5;">Point-of-care answers on diagnosis, treatment, and pharmacology — structured for speed, reviewed by physicians.</p>
+
+      <div style="display: flex; align-items: center; background: #FFFFFF; border: 1.5px solid #DDE1E4; border-radius: 999px; height: 62px; padding: 0 8px 0 26px; box-shadow: 0 4px 16px rgba(16,24,40,0.06);">
+        <input placeholder="Ask a medical question…" style="flex: 1; border: none; outline: none; font-size: 16px; font-family: Inter, sans-serif; color: #1A1A1A; background: transparent;" style-focus="box-shadow: none;" />
+        <div style="width: 44px; height: 44px; border-radius: 50%; background: #0056B3; display: flex; align-items: center; justify-content: center; cursor: pointer; flex-shrink: 0;">
+          <div style="width: 0; height: 0; border-top: 6px solid transparent; border-bottom: 6px solid transparent; border-left: 8px solid #FFFFFF; margin-left: 3px;"></div>
+        </div>
+      </div>
+      <p style="font-size: 13px; color: #AEB6BE; margin: 14px 0 34px;">Fictional demo content for design purposes only — not medical advice.</p>
+
+      <div style="display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+        <sc-for list="{{ specialtyTags }}" as="tag" hint-placeholder-count="6">
+          <div style="background: #FFFFFF; border: 1px solid #E1E5E9; border-radius: 999px; padding: 8px 16px; font-size: 13px; font-weight: 500; color: #1A1A1A; cursor: pointer;" style-hover="border-color: #0056B3; color: #0056B3;">{{ tag }}</div>
+        </sc-for>
+      </div>
+
+      <div style="display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 28px;">
+        <div style="display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #DDE1E4; border-radius: 12px; padding: 11px 18px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 1px 2px rgba(16,24,40,0.04);" style-hover="border-color: #0056B3;">
+          <span style="position: relative; width: 15px; height: 15px; display: inline-block; flex-shrink: 0;"><span style="position: absolute; width: 11px; height: 11px; border: 2px solid #0056B3; border-radius: 50%; box-sizing: border-box;"></span><span style="position: absolute; width: 6px; height: 2px; background: #0056B3; bottom: 0; right: -1px; border-radius: 1px; transform: rotate(45deg);"></span></span>
+          Research a Topic
+        </div>
+        <div style="display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #DDE1E4; border-radius: 12px; padding: 11px 18px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 1px 2px rgba(16,24,40,0.04);" style-hover="border-color: #0056B3;">
+          <span style="position: relative; width: 18px; height: 11px; border: 2px solid #0056B3; border-radius: 6px; box-sizing: border-box; flex-shrink: 0; overflow: hidden;"><span style="position: absolute; top: -2px; left: 6px; width: 2px; height: 15px; background: #0056B3; transform: rotate(28deg);"></span></span>
+          Drug Interactions
+        </div>
+        <div onClick="{{ goForum }}" style="display: flex; align-items: center; gap: 10px; background: #FFFFFF; border: 1px solid #DDE1E4; border-radius: 12px; padding: 11px 18px; font-size: 14px; font-weight: 600; cursor: pointer; box-shadow: 0 1px 2px rgba(16,24,40,0.04);" style-hover="border-color: #0056B3;">
+          <span style="position: relative; width: 16px; height: 13px; border: 2px solid #0056B3; border-radius: 4px; box-sizing: border-box; flex-shrink: 0;"><span style="position: absolute; bottom: -5px; left: 2px; width: 5px; height: 5px; background: #0056B3; transform: rotate(45deg);"></span></span>
+          Case Discussions
+        </div>
+      </div>
+    </section>
+
+    <div style="max-width: 940px; margin: 0 auto; padding: 4px 24px 44px; display: flex; justify-content: center; gap: 44px; flex-wrap: wrap;">
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 42px; height: 42px; border-radius: 12px; background: #EAF2FB; display: flex; align-items: center; justify-content: center;"><span style="width: 15px; height: 19px; border: 2px solid #0056B3; border-radius: 2px; box-sizing: border-box; display: block; position: relative;"><span style="position: absolute; left: 2px; top: 4px; right: 4px; height: 2px; background: #0056B3;"></span><span style="position: absolute; left: 2px; top: 8px; right: 4px; height: 2px; background: #0056B3;"></span></span></div>
+        <div style="text-align: left; line-height: 1.25;"><div style="font-size: 16px; font-weight: 800;">4,200+</div><div style="font-size: 12.5px; color: #5B6572;">evidence summaries</div></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 42px; height: 42px; border-radius: 12px; background: #EAF2FB; display: flex; align-items: center; justify-content: center;"><span style="position: relative; width: 20px; height: 20px; display: block;"><span style="position: absolute; left: 3px; top: 9px; width: 6px; height: 2px; background: #0056B3; border-radius: 1px; transform: rotate(45deg);"></span><span style="position: absolute; left: 6px; top: 6px; width: 12px; height: 2px; background: #0056B3; border-radius: 1px; transform: rotate(-50deg);"></span></span></div>
+        <div style="text-align: left; line-height: 1.25;"><div style="font-size: 16px; font-weight: 800;">300+</div><div style="font-size: 12.5px; color: #5B6572;">reviewing physicians</div></div>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <div style="width: 42px; height: 42px; border-radius: 12px; background: #EAF2FB; display: flex; align-items: center; justify-content: center;"><span style="position: relative; width: 18px; height: 18px; border: 2px solid #0056B3; border-radius: 50%; box-sizing: border-box; display: block;"><span style="position: absolute; left: 6px; top: 3px; width: 2px; height: 5px; background: #0056B3;"></span><span style="position: absolute; left: 6px; top: 7px; width: 5px; height: 2px; background: #0056B3;"></span></span></div>
+        <div style="text-align: left; line-height: 1.25;"><div style="font-size: 16px; font-weight: 800;">Daily</div><div style="font-size: 12.5px; color: #5B6572;">editorial updates</div></div>
+      </div>
+    </div>
+    </div>
+
+    <section style="max-width: 1160px; margin: 0 auto; padding: 40px 40px 8px;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; margin-bottom: 22px;">
+        <h2 style="font-size: 22px; font-weight: 800; letter-spacing: -0.01em; margin: 0;">Trending topics</h2>
+        <span style="font-size: 14px; font-weight: 600; color: #0056B3; cursor: pointer;">View all →</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;">
+        <sc-for list="{{ trendingTopics }}" as="topic" hint-placeholder-count="3">
+          <div onClick="{{ goArticle }}" style="border: 1px solid #E9ECEF; border-radius: 14px; overflow: hidden; cursor: pointer; background: #FFFFFF; box-shadow: 0 1px 2px rgba(16,24,40,0.04); display: flex; flex-direction: column;" style-hover="box-shadow: 0 10px 28px rgba(16,24,40,0.10); transform: translateY(-2px);">
+            <div style="position: relative; height: 168px; background-image: repeating-linear-gradient(45deg, #EAEEF2 0 12px, #F4F7F9 12px 24px); display: flex; align-items: center; justify-content: center;">
+              <span style="position: absolute; top: 14px; left: 14px; background: rgba(255,255,255,0.94); color: #1A1A1A; font-size: 12px; font-weight: 600; padding: 5px 12px; border-radius: 999px; box-shadow: 0 1px 3px rgba(16,24,40,0.12);">{{ topic.tag }}</span>
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 8px;">
+                <div style="position: relative; width: 28px; height: 28px;"><div style="position: absolute; left: 12px; top: 0; width: 4px; height: 28px; background: #CBD4DD; border-radius: 1px;"></div><div style="position: absolute; top: 12px; left: 0; width: 28px; height: 4px; background: #CBD4DD; border-radius: 1px;"></div></div>
+                <span style="font-family: ui-monospace, monospace; font-size: 11px; color: #AEB6BE; letter-spacing: 0.04em;">{{ topic.img }}</span>
+              </div>
+            </div>
+            <div style="padding: 18px 20px 20px; display: flex; flex-direction: column; gap: 8px; flex: 1;">
+              <div style="font-size: 17px; font-weight: 700; line-height: 1.32; letter-spacing: -0.01em;">{{ topic.title }}</div>
+              <div style="font-size: 13.5px; color: #5B6572; line-height: 1.5; flex: 1;">{{ topic.desc }}</div>
+              <div style="font-size: 12px; color: #9AA3AC; margin-top: 6px;">{{ topic.meta }}</div>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <section style="max-width: 1160px; margin: 0 auto; padding: 44px 40px 8px;">
+      <h2 style="font-size: 22px; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 22px;">From the editors</h2>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px;">
+        <sc-for list="{{ editorFeatures }}" as="f" hint-placeholder-count="2">
+          <div>
+            <div style="height: 260px; border-radius: 14px; background-image: repeating-linear-gradient(45deg, #E4EBF2 0 14px, #EFF4F8 14px 28px); display: flex; align-items: center; justify-content: center;">
+              <div style="display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <div style="position: relative; width: 36px; height: 36px;"><div style="position: absolute; left: 15px; top: 0; width: 6px; height: 36px; background: #C3CEDA; border-radius: 1px;"></div><div style="position: absolute; top: 15px; left: 0; width: 36px; height: 6px; background: #C3CEDA; border-radius: 1px;"></div></div>
+                <span style="font-family: ui-monospace, monospace; font-size: 11px; color: #A6B2BE; letter-spacing: 0.04em;">{{ f.img }}</span>
+              </div>
+            </div>
+            <div style="background: #FFFFFF; margin: -44px 24px 0 0; padding: 24px 26px; border-radius: 12px; box-shadow: 0 8px 24px rgba(16,24,40,0.08); position: relative;">
+              <h3 style="font-size: 21px; font-weight: 700; color: #0056B3; margin: 0 0 10px; line-height: 1.28; letter-spacing: -0.01em;">{{ f.title }}</h3>
+              <p style="font-size: 15px; color: #5B6572; line-height: 1.55; margin: 0 0 16px;">{{ f.desc }}</p>
+              <span onClick="{{ goArticle }}" style="font-size: 14px; font-weight: 600; color: #0056B3; cursor: pointer;">Read the article →</span>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+
+    <div style="background: #F1F7FD; border-top: 1px solid #E4EEF7; border-bottom: 1px solid #E4EEF7; margin-top: 56px;">
+      <div style="max-width: 1160px; margin: 0 auto; padding: 60px 40px;">
+        <h2 style="font-size: 26px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 6px; text-align: center;">Built for the point of care</h2>
+        <p style="font-size: 15px; color: #5B6572; text-align: center; margin: 0 0 44px;">Evidence, tools, and clinical discussion — engineered for the pace of practice.</p>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; align-items: stretch;">
+
+          <div style="text-align: center; padding: 32px 24px;">
+            <div style="width: 56px; height: 56px; margin: 0 auto 20px; position: relative;">
+              <div style="position: absolute; top: 16px; left: 8px; width: 34px; height: 15px; border: 2.5px solid #0056B3; border-radius: 8px; box-sizing: border-box; transform: rotate(-32deg);"></div>
+              <div style="position: absolute; top: 25px; left: 16px; width: 34px; height: 15px; border: 2.5px solid #0056B3; border-radius: 8px; box-sizing: border-box; transform: rotate(-32deg);"></div>
+            </div>
+            <h3 style="font-size: 19px; font-weight: 700; color: #0056B3; margin: 0 0 10px; letter-spacing: -0.01em;">Commitment to medication safety</h3>
+            <p style="font-size: 14.5px; color: #45505B; line-height: 1.6; margin: 0 0 18px;">Every summary is powered by a multidisciplinary editorial team delivering best-practice evidence and dosing recommendations.</p>
+            <span onClick="{{ goArticle }}" style="font-size: 14px; font-weight: 600; color: #0056B3; cursor: pointer;">Explore editorial process →</span>
+          </div>
+
+          <div style="text-align: center; padding: 32px 26px; background: #FFFFFF; border: 1px solid #E1E5E9; border-radius: 18px; box-shadow: 0 14px 40px rgba(16,24,40,0.10);">
+            <div style="width: 56px; height: 56px; margin: 0 auto 20px; position: relative;">
+              <div style="position: absolute; top: 12px; left: 12px; width: 28px; height: 20px; border: 2.5px solid #0056B3; border-radius: 3px; box-sizing: border-box;"></div>
+              <div style="position: absolute; top: 33px; left: 6px; width: 44px; height: 3px; background: #0056B3; border-radius: 2px;"></div>
+              <div style="position: absolute; top: 4px; left: 30px; width: 20px; height: 18px; border: 2.5px solid #0056B3; border-radius: 7px; background: #FFFFFF; box-sizing: border-box;">
+                <div style="position: absolute; left: 8px; top: 3px; width: 2.5px; height: 8px; background: #0056B3; border-radius: 1px;"></div>
+                <div style="position: absolute; top: 6px; left: 4.5px; width: 8px; height: 2.5px; background: #0056B3; border-radius: 1px;"></div>
+              </div>
+            </div>
+            <h3 style="font-size: 19px; font-weight: 700; color: #0056B3; margin: 0 0 10px; letter-spacing: -0.01em;">Point-of-care decision tools</h3>
+            <p style="font-size: 14.5px; color: #45505B; line-height: 1.6; margin: 0 0 20px;">Weight-based dosing, renal adjustment, and interaction checks embedded directly inside the article you're reading.</p>
+            <div onClick="{{ goArticle }}" style="display: inline-block; background: #0056B3; color: #FFFFFF; font-size: 14px; font-weight: 600; padding: 11px 22px; border-radius: 8px; cursor: pointer;">Open a sample article →</div>
+          </div>
+
+          <div style="text-align: center; padding: 32px 24px;">
+            <div style="width: 56px; height: 56px; margin: 0 auto 20px; position: relative;">
+              <div style="position: absolute; top: 12px; left: 9px; width: 11px; height: 11px; border: 2.5px solid #0056B3; border-radius: 50%; box-sizing: border-box;"></div>
+              <div style="position: absolute; top: 26px; left: 6px; width: 42px; height: 11px; border: 2.5px solid #0056B3; border-radius: 3px; box-sizing: border-box;"></div>
+              <div style="position: absolute; top: 20px; left: 6px; width: 3px; height: 24px; background: #0056B3; border-radius: 1px;"></div>
+              <div style="position: absolute; top: 37px; left: 43px; width: 3px; height: 7px; background: #0056B3; border-radius: 1px;"></div>
+            </div>
+            <h3 style="font-size: 19px; font-weight: 700; color: #0056B3; margin: 0 0 10px; letter-spacing: -0.01em;">Patient-specific approach</h3>
+            <p style="font-size: 14.5px; color: #45505B; line-height: 1.6; margin: 0 0 18px;">Evidence and recommendations to help you treat complex patients — renal impairment, pregnancy, polypharmacy, and more.</p>
+            <span onClick="{{ goForum }}" style="font-size: 14px; font-weight: 600; color: #0056B3; cursor: pointer;">Join the discussion →</span>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div style="background: #EEF6FD; border-top: 1px solid #DCEAF7; border-bottom: 1px solid #DCEAF7; margin-top: 56px;">
+      <section style="max-width: 1160px; margin: 0 auto; padding: 60px 40px;">
+        <div style="text-align: center; margin-bottom: 44px;">
+          <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; color: #0056B3; text-transform: uppercase; margin-bottom: 10px;">Why clinicians choose Attending</div>
+          <h2 style="font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0; color: #0A2540;">Built for the point of care</h2>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px;">
+          <div style="text-align: center;">
+            <div style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+              <svg width="54" height="54" viewBox="0 0 52 52" fill="none" stroke="#0F62C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <g transform="rotate(-40 26 26)"><rect x="9" y="19" width="34" height="14" rx="7"/><line x1="26" y1="19" x2="26" y2="33"/></g>
+              </svg>
+            </div>
+            <h3 style="font-size: 19px; font-weight: 700; color: #0056B3; margin: 0 0 12px; letter-spacing: -0.01em;">Commitment to medication safety</h3>
+            <p style="font-size: 15px; color: #45505B; line-height: 1.6; margin: 0 0 18px;">Every drug monograph is powered by a multidisciplinary editorial team delivering best-practice evidence and clear recommendations.</p>
+            <span style="font-size: 14px; font-weight: 600; color: #0056B3; cursor: pointer;">Explore editorial process →</span>
+          </div>
+          <div style="text-align: center;">
+            <div style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+              <svg width="54" height="54" viewBox="0 0 52 52" fill="none" stroke="#0F62C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="10" y="15" width="26" height="18" rx="2"/>
+                <path d="M6 39 L46 39 L42 33 L10 33 Z"/>
+                <circle cx="41" cy="14" r="8.5" fill="#EEF6FD"/>
+                <line x1="41" y1="10.4" x2="41" y2="17.6"/><line x1="37.4" y1="14" x2="44.6" y2="14"/>
+              </svg>
+            </div>
+            <h3 style="font-size: 19px; font-weight: 700; color: #0056B3; margin: 0 0 12px; letter-spacing: -0.01em;">Decision support at the bedside</h3>
+            <p style="font-size: 15px; color: #45505B; line-height: 1.6; margin: 0 0 18px;">Calculators, dosing ladders, and interaction checks are integrated directly into every reference to improve safety and speed.</p>
+            <span style="font-size: 14px; font-weight: 600; color: #0056B3; cursor: pointer;">See the tools →</span>
+          </div>
+          <div style="text-align: center;">
+            <div style="height: 60px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+              <svg width="54" height="54" viewBox="0 0 52 52" fill="none" stroke="#0F62C4" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="31" y="7" width="15" height="12" rx="1.5"/>
+                <path d="M34 13.2 h2.6 l1.4 -3.4 l2 6.6 l1.4 -3.2 h2.6" stroke-width="1.6"/>
+                <circle cx="13" cy="26" r="3.6"/>
+                <path d="M17 30 q7 0.5 12 3.2"/>
+                <path d="M6 40 h30"/>
+                <path d="M8 40 v-6"/>
+              </svg>
+            </div>
+            <h3 style="font-size: 19px; font-weight: 700; color: #0056B3; margin: 0 0 12px; letter-spacing: -0.01em;">A patient-specific approach</h3>
+            <p style="font-size: 15px; color: #45505B; line-height: 1.6; margin: 0 0 18px;">Guidance that accounts for complex histories — renal impairment, pregnancy, and comorbidity — so recommendations fit the patient in front of you.</p>
+            <span style="font-size: 14px; font-weight: 600; color: #0056B3; cursor: pointer;">Learn more →</span>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <section style="max-width: 1160px; margin: 0 auto; padding: 64px 40px 72px;">
+      <h2 style="font-size: 22px; font-weight: 800; letter-spacing: -0.01em; margin: 0 0 10px;">Recently discussed</h2>
+      <div style="border-top: 1px solid #E9ECEF;">
+        <sc-for list="{{ recentDiscussions }}" as="d" hint-placeholder-count="3">
+          <div onClick="{{ goForum }}" style="display: flex; align-items: center; justify-content: space-between; padding: 18px 4px; border-bottom: 1px solid #E9ECEF; cursor: pointer; gap: 16px;" style-hover="background: #FAFBFC;">
+            <div style="display: flex; align-items: center; gap: 14px; min-width: 0;">
+              <span style="background: #EAF2FB; color: #0056B3; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 999px; flex-shrink: 0;">{{ d.tag }}</span>
+              <span style="font-size: 15px; font-weight: 600; color: #1A1A1A; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ d.title }}</span>
+            </div>
+            <span style="font-size: 13px; color: #9AA3AC; flex-shrink: 0;">{{ d.replies }} replies · {{ d.activity }}</span>
+          </div>
+        </sc-for>
+      </div>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isArticle }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width: 1200px; margin: 0 auto; padding: 44px 40px 88px; display: grid; grid-template-columns: 230px 1fr; gap: 56px; align-items: start;">
+      <nav style="position: sticky; top: 98px; display: flex; flex-direction: column; gap: 2px;">
+        <span style="font-size: 11px; font-weight: 700; color: #9AA3AC; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px;">On this page</span>
+        <a href="#overview" style="font-size: 14px; padding: 7px 12px; color: #0056B3; font-weight: 600; background: #EAF2FB; border-radius: 8px;">Overview</a>
+        <a href="#diagnosis" style="font-size: 14px; padding: 7px 12px; color: #45505B;">Diagnosis</a>
+        <a href="#treatment" style="font-size: 14px; padding: 7px 12px; color: #45505B;">Treatment Algorithms</a>
+        <a href="#pharmacology" style="font-size: 14px; padding: 7px 12px; color: #45505B;">Pharmacology</a>
+        <a href="#complications" style="font-size: 14px; padding: 7px 12px; color: #45505B;">Complications</a>
+        <a href="#decision" style="font-size: 14px; padding: 7px 12px; color: #45505B;">Decision Support</a>
+      </nav>
+
+      <article style="min-width: 0;">
+        <div style="display: inline-block; background: #EAF2FB; color: #0056B3; font-size: 12px; font-weight: 700; padding: 5px 12px; border-radius: 999px; margin-bottom: 16px;">Endocrinology · Review</div>
+        <h1 style="font-size: 36px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 14px; line-height: 1.12;">Type 2 Diabetes Mellitus: Outpatient Management</h1>
+        <p style="font-size: 13px; color: #9AA3AC; margin: 0 0 18px;">Last Updated: July 8, 2026 · Next Scheduled Review: January 2027</p>
+
+        <div style="display: flex; align-items: center; justify-content: space-between; padding: 16px 0; border-top: 1px solid #E9ECEF; border-bottom: 1px solid #E9ECEF; margin-bottom: 32px; gap: 16px; flex-wrap: wrap;">
+          <div style="display: flex; align-items: center; gap: 20px;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: #EAF2FB; color: #0056B3; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center;">MC</div>
+              <div style="line-height: 1.3;"><div style="font-size: 13.5px; font-weight: 600;">Maria Chen, MD</div><div style="font-size: 12px; color: #9AA3AC;">Author · Endocrinology</div></div>
+            </div>
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 50%; background: #F0F2F4; color: #5B6572; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center;">JO</div>
+              <div style="line-height: 1.3;"><div style="font-size: 13.5px; font-weight: 600;">James Okonkwo, PharmD</div><div style="font-size: 12px; color: #9AA3AC;">Reviewing physician</div></div>
+            </div>
+          </div>
+          <div style="display: flex; gap: 8px;">
+            <div style="border: 1px solid #DDE1E4; border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; color: #0056B3; cursor: pointer;">Cite</div>
+            <div style="border: 1px solid #DDE1E4; border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; color: #0056B3; cursor: pointer;">Save</div>
+            <div style="border: 1px solid #DDE1E4; border-radius: 8px; padding: 7px 14px; font-size: 13px; font-weight: 600; color: #0056B3; cursor: pointer;">Share</div>
+          </div>
+        </div>
+
+        <section id="overview" style="margin-bottom: 44px;">
+          <h2 style="font-size: 23px; font-weight: 700; margin: 0 0 14px; letter-spacing: -0.01em;">Overview</h2>
+          <p style="font-size: 16px; line-height: 1.65; margin: 0 0 12px;">Type 2 diabetes mellitus (T2DM) is a chronic metabolic disorder characterized by insulin resistance and progressive beta-cell dysfunction. Outpatient management centers on glycemic control, cardiovascular risk reduction, and prevention of microvascular complications.</p>
+          <p style="font-size: 16px; line-height: 1.65; margin: 0;">First-line pharmacotherapy has shifted toward agents with demonstrated cardiorenal benefit, independent of glycemic effect.</p>
+        </section>
+
+        <div style="position: relative;">
+        <section id="diagnosis" style="margin-bottom: 44px;">
+          <h2 style="font-size: 23px; font-weight: 700; margin: 0 0 14px; letter-spacing: -0.01em;">Diagnosis</h2>
+          <ul style="font-size: 16px; line-height: 1.75; padding-left: 22px; margin: 0;">
+            <li>Fasting plasma glucose <b>≥126 mg/dL</b> on two separate occasions</li>
+            <li><b>HbA1c ≥6.5%</b>, measured by an NGSP-certified assay</li>
+            <li>2-hour plasma glucose <b>≥200 mg/dL</b> during a 75g OGTT</li>
+            <li>Random plasma glucose <b>≥200 mg/dL</b> with classic hyperglycemic symptoms</li>
+          </ul>
+        </section>
+
+        <section id="treatment" style="margin-bottom: 44px;">
+          <h2 style="font-size: 23px; font-weight: 700; margin: 0 0 14px; letter-spacing: -0.01em;">Treatment Algorithms</h2>
+          <div style="background: #F4F8FC; border-radius: 14px; padding: 22px 26px;">
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
+              <span style="font-size: 14px; font-weight: 700;">Bottom-line recommendation</span>
+              <span style="background: #0056B3; color: #FFFFFF; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; padding: 3px 10px; border-radius: 999px;">Level A Evidence</span>
+            </div>
+            <p style="font-size: 16px; line-height: 1.65; margin: 0;">Initiate <b>Metformin 500–2000mg/day</b>, titrated over 4–8 weeks, alongside lifestyle intervention. Add a <b>GLP-1 receptor agonist</b> or <b>SGLT2 inhibitor</b> for patients with established cardiovascular or renal disease, regardless of baseline HbA1c.</p>
+          </div>
+          <span onClick="{{ toggleTreatment }}" style="display: inline-block; margin-top: 14px; font-size: 14px; font-weight: 600; color: #0056B3; cursor: pointer;">{{ treatmentToggleLabel }}</span>
+          <sc-if value="{{ treatmentExpanded }}" hint-placeholder-val="{{ false }}">
+            <p style="font-size: 16px; line-height: 1.65; margin: 16px 0 0;">Metformin remains first-line therapy largely due to its favorable long-term cardiovascular safety profile and low hypoglycemia risk<span style="position: relative; display: inline-block;"><sup style="color: #0056B3; cursor: pointer; font-weight: 700;" style-hover="text-decoration: underline;">1</sup><span style="position: absolute; bottom: 22px; left: -10px; width: 270px; background: #1A1A1A; color: #FFFFFF; font-size: 12px; line-height: 1.5; padding: 11px 13px; border-radius: 10px; opacity: 0; pointer-events: none; transition: opacity 0.15s; z-index: 5; box-shadow: 0 6px 20px rgba(0,0,0,0.25);" style-hover="opacity:1;">Hammoud R, Drucker DJ. Beyond the pancreas: contrasting cardiometabolic actions of GIP and GLP1. Nat Rev Endocrinol. 2023;19(4):201–216.</span></span>. Its mechanism — primarily hepatic gluconeogenesis suppression — complements the extra-pancreatic actions of incretin-based therapies.</p>
+          </sc-if>
+        </section>
+
+        <section id="pharmacology" style="margin-bottom: 44px;">
+          <h2 style="font-size: 23px; font-weight: 700; margin: 0 0 18px; letter-spacing: -0.01em;">Pharmacology</h2>
+          <table style="width: 100%; border-collapse: collapse; font-size: 14px; margin-bottom: 30px;">
+            <thead>
+              <tr style="border-bottom: 2px solid #1A1A1A;">
+                <th style="text-align: left; padding: 10px 12px 10px 0; font-weight: 700;">Drug Class</th>
+                <th style="text-align: left; padding: 10px 12px; font-weight: 700;">Mechanism</th>
+                <th style="text-align: left; padding: 10px 12px; font-weight: 700;">Renal Adjustment</th>
+                <th style="text-align: left; padding: 10px 0 10px 12px; font-weight: 700;">Key Side Effect</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr style="border-bottom: 1px solid #E9ECEF;">
+                <td style="padding: 11px 12px 11px 0; font-weight: 600;">Metformin</td>
+                <td style="padding: 11px 12px; color: #5B6572;">↓ hepatic gluconeogenesis</td>
+                <td style="padding: 11px 12px; color: #5B6572;">Avoid eGFR &lt;30</td>
+                <td style="padding: 11px 0 11px 12px; color: #5B6572;">GI upset</td>
+              </tr>
+              <tr style="border-bottom: 1px solid #E9ECEF;">
+                <td style="padding: 11px 12px 11px 0; font-weight: 600;">SGLT2 Inhibitors</td>
+                <td style="padding: 11px 12px; color: #5B6572;">↓ renal glucose reabsorption</td>
+                <td style="padding: 11px 12px; color: #5B6572;">Limited efficacy eGFR &lt;20</td>
+                <td style="padding: 11px 0 11px 12px; color: #5B6572;">Genital mycotic infection</td>
+              </tr>
+              <tr>
+                <td style="padding: 11px 12px 11px 0; font-weight: 600;">GLP-1 Agonists</td>
+                <td style="padding: 11px 12px; color: #5B6572;">↑ glucose-dependent insulin</td>
+                <td style="padding: 11px 12px; color: #5B6572;">No dose adjustment</td>
+                <td style="padding: 11px 0 11px 12px; color: #5B6572;">Nausea</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div style="border: 1px solid #E1E5E9; border-radius: 14px; padding: 22px 26px; background: #FCFDFE;">
+            <div style="font-size: 15px; font-weight: 700; margin-bottom: 16px;">Creatinine Clearance Calculator <span style="color:#9AA3AC; font-weight: 500;">(Cockcroft–Gault)</span></div>
+            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-bottom: 16px;">
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #5B6572; font-weight: 600;">Age (yrs)
+                <input type="number" value="{{ calcAge }}" onChange="{{ setCalcAge }}" style="border: 1px solid #DDE1E4; border-radius: 8px; padding: 9px 11px; font-size: 14px; font-family: Inter, sans-serif;" />
+              </label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #5B6572; font-weight: 600;">Weight (kg)
+                <input type="number" value="{{ calcWeight }}" onChange="{{ setCalcWeight }}" style="border: 1px solid #DDE1E4; border-radius: 8px; padding: 9px 11px; font-size: 14px; font-family: Inter, sans-serif;" />
+              </label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #5B6572; font-weight: 600;">Creatinine (mg/dL)
+                <input type="number" step="0.1" value="{{ calcCreatinine }}" onChange="{{ setCalcCreatinine }}" style="border: 1px solid #DDE1E4; border-radius: 8px; padding: 9px 11px; font-size: 14px; font-family: Inter, sans-serif;" />
+              </label>
+              <label style="display: flex; flex-direction: column; gap: 6px; font-size: 12px; color: #5B6572; font-weight: 600;">Sex
+                <select value="{{ calcSex }}" onChange="{{ setCalcSex }}" style="border: 1px solid #DDE1E4; border-radius: 8px; padding: 9px 11px; font-size: 14px; font-family: Inter, sans-serif;">
+                  <option value="M">Male</option>
+                  <option value="F">Female</option>
+                </select>
+              </label>
+            </div>
+            <div style="font-size: 15px; margin-bottom: 12px;">Estimated CrCl: <b style="font-size: 19px; color: #0056B3;">{{ crclValue }} mL/min</b></div>
+            <sc-if value="{{ showRenalCaution }}" hint-placeholder-val="{{ false }}">
+              <div style="background: #FFF8E1; color: #7A5B00; border-radius: 10px; padding: 12px 15px; font-size: 13px; line-height: 1.5;"><b>Caution:</b> CrCl below 45 mL/min — consider dose adjustment or discontinuation of metformin per renal dosing guidance.</div>
+            </sc-if>
+          </div>
+        </section>
+
+        <section id="complications" style="margin-bottom: 44px;">
+          <h2 style="font-size: 23px; font-weight: 700; margin: 0 0 14px; letter-spacing: -0.01em;">Complications</h2>
+          <ul style="font-size: 16px; line-height: 1.75; padding-left: 22px; margin: 0 0 22px;">
+            <li>Diabetic retinopathy — annual dilated eye exam</li>
+            <li>Diabetic nephropathy — annual urine albumin-to-creatinine ratio</li>
+            <li>Peripheral neuropathy — annual monofilament foot exam</li>
+          </ul>
+          <div style="background: #FDECEC; border-radius: 12px; padding: 16px 18px;">
+            <div style="color: #DC3545; font-weight: 700; font-size: 14px; margin-bottom: 5px;">Critical interaction</div>
+            <p style="color: #842029; font-size: 14px; line-height: 1.55; margin: 0;">Concurrent use with iodinated contrast media requires temporary <b>metformin</b> discontinuation due to risk of lactic acidosis in patients with impaired renal clearance.</p>
+          </div>
+        </section>
+
+        <section id="decision" style="margin-bottom: 8px;">
+          <h2 style="font-size: 23px; font-weight: 700; margin: 0 0 14px; letter-spacing: -0.01em;">Quick Decision Support</h2>
+          <div style="border: 1px solid #E1E5E9; border-radius: 14px; padding: 22px 26px; background: #FCFDFE;">
+            <div style="font-size: 15px; font-weight: 600; margin-bottom: 16px;">Is the patient pregnant or planning pregnancy?</div>
+            <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+              <div onClick="{{ setPregnantYes }}" style="border: 1px solid {{ yesBorderColor }}; background: {{ yesBg }}; color: {{ yesColor }}; border-radius: 8px; padding: 9px 24px; font-size: 14px; font-weight: 600; cursor: pointer;">Yes</div>
+              <div onClick="{{ setPregnantNo }}" style="border: 1px solid {{ noBorderColor }}; background: {{ noBg }}; color: {{ noColor }}; border-radius: 8px; padding: 9px 24px; font-size: 14px; font-weight: 600; cursor: pointer;">No</div>
+            </div>
+            <sc-if value="{{ showPregnantPanel }}" hint-placeholder-val="{{ false }}">
+              <div style="background: #F4F8FC; border-radius: 10px; padding: 14px 16px; font-size: 14px; line-height: 1.6;">{{ pregnantPanelText }}</div>
+            </sc-if>
+          </div>
+        </section>
+
+        <sc-if value="{{ gated }}" hint-placeholder-val="{{ true }}">
+          <div style="position: absolute; left: -24px; right: -24px; top: 250px; bottom: -24px; background: linear-gradient(180deg, rgba(255,255,255,0) 0%, #FFFFFF 110px, #FFFFFF 100%); display: flex; justify-content: center; align-items: flex-start; padding: 140px 20px 0;">
+            <div style="max-width: 540px; width: 100%; background: #FFFFFF; border: 1px solid #E1E5E9; border-radius: 18px; box-shadow: 0 24px 60px rgba(16,24,40,0.16); padding: 34px 36px; text-align: center;">
+              <div style="width: 54px; height: 54px; border-radius: 15px; background: #EAF2FB; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;">
+                <div style="position: relative; width: 26px; height: 25px;"><div style="position: absolute; bottom: 0; left: 3px; width: 20px; height: 15px; background: #0056B3; border-radius: 4px;"></div><div style="position: absolute; top: 0; left: 7px; width: 12px; height: 12px; border: 3px solid #0056B3; border-bottom: none; border-radius: 8px 8px 0 0; box-sizing: border-box;"></div></div>
+              </div>
+              <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: #0056B3; margin-bottom: 10px;">Members only</div>
+              <h3 style="font-size: 25px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 8px; line-height: 1.15;">Create a free account to keep reading</h3>
+              <p style="font-size: 15px; color: #5B6572; line-height: 1.55; margin: 0 0 22px;">Join 40,000+ clinicians with full access to evidence summaries, point-of-care calculators, and case discussions.</p>
+
+              <div style="display: flex; align-items: center; gap: 14px; text-align: left; background: #F4F8FC; border: 1px solid #E1EAF3; border-radius: 12px; padding: 14px 16px; margin-bottom: 22px;">
+                <div style="width: 46px; height: 56px; background: #FFFFFF; border: 1px solid #DDE1E4; border-radius: 4px; position: relative; flex-shrink: 0; display: flex; align-items: flex-end; justify-content: center; overflow: hidden;">
+                  <div style="position: absolute; top: 0; right: 0; width: 0; height: 0; border-top: 12px solid #DC3545; border-left: 12px solid transparent;"></div>
+                  <span style="font-family: ui-monospace, monospace; font-size: 8px; color: #DC3545; font-weight: 700; margin-bottom: 7px;">PDF</span>
+                </div>
+                <div>
+                  <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: #0056B3; margin-bottom: 3px;">Free download</div>
+                  <div style="font-size: 14px; font-weight: 700; line-height: 1.3;">2026 Outpatient Diabetes Pocket Guide</div>
+                  <div style="font-size: 12px; color: #9AA3AC; margin-top: 2px;">28-page dosing & titration reference (PDF)</div>
+                </div>
+              </div>
+
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px;">
+                <input placeholder="First name" style="border: 1px solid #DDE1E4; border-radius: 9px; padding: 12px 14px; font-size: 14px; font-family: Inter, sans-serif; box-sizing: border-box; width: 100%;" />
+                <input placeholder="Last name" style="border: 1px solid #DDE1E4; border-radius: 9px; padding: 12px 14px; font-size: 14px; font-family: Inter, sans-serif; box-sizing: border-box; width: 100%;" />
+              </div>
+              <input placeholder="Work email" style="border: 1px solid #DDE1E4; border-radius: 9px; padding: 12px 14px; font-size: 14px; font-family: Inter, sans-serif; box-sizing: border-box; width: 100%; margin-bottom: 14px;" />
+              <div onClick="{{ unlockArticle }}" style="background: #0056B3; color: #FFFFFF; font-size: 15px; font-weight: 700; padding: 14px; border-radius: 10px; cursor: pointer;">Create free account &amp; unlock</div>
+              <p style="font-size: 12px; color: #9AA3AC; margin: 14px 0 0;">Already a member? <span onClick="{{ unlockArticle }}" style="color: #0056B3; font-weight: 600; cursor: pointer;">Log in</span> · No credit card required</p>
+            </div>
+          </div>
+        </sc-if>
+        </div>
+
+        <sc-if value="{{ notGated }}" hint-placeholder-val="{{ false }}">
+          <div style="margin-top: 44px; text-align: center;"><span onClick="{{ relockArticle }}" style="font-size: 13px; color: #9AA3AC; cursor: pointer;">↺ Reset demo — re-lock this article</span></div>
+        </sc-if>
+      </article>
+    </section>
+  </sc-if>
+
+  <sc-if value="{{ isForum }}" hint-placeholder-val="{{ false }}">
+    <section style="max-width: 860px; margin: 0 auto; padding: 44px 40px 88px;">
+      <div style="font-size: 13px; color: #9AA3AC; margin-bottom: 16px;"><span onClick="{{ goForum }}" style="cursor:pointer;">Discussions</span> / Endocrinology</div>
+      <h1 style="font-size: 28px; font-weight: 800; letter-spacing: -0.02em; margin: 0 0 14px; line-height: 1.25;">Metformin dosing threshold in CKD stage 3b — what's your cutoff?</h1>
+      <div style="display: flex; gap: 8px; margin-bottom: 14px;">
+        <span style="background: #EAF2FB; color: #0056B3; border-radius: 999px; padding: 4px 12px; font-size: 12px; font-weight: 700;">Endocrinology</span>
+        <span style="background: #EAF2FB; color: #0056B3; border-radius: 999px; padding: 4px 12px; font-size: 12px; font-weight: 700;">Nephrology</span>
+        <span style="background: #EAF2FB; color: #0056B3; border-radius: 999px; padding: 4px 12px; font-size: 12px; font-weight: 700;">Pharmacology</span>
+      </div>
+      <p style="font-size: 13px; color: #9AA3AC; margin: 0 0 30px;">Started by K. Ramirez, MD · 3 replies · last activity 2 hours ago</p>
+
+      <div style="border-top: 1px solid #E9ECEF; padding: 22px 0; border-bottom: 1px solid #E9ECEF;">
+        <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+          <div style="width: 38px; height: 38px; border-radius: 50%; background: #EAF2FB; color: #0056B3; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center;">KR</div>
+          <div style="line-height: 1.3;"><div style="font-weight: 700; font-size: 14px;">K. Ramirez, MD</div><div style="font-size: 12px; color: #9AA3AC;">2 days ago</div></div>
+        </div>
+        <p style="font-size: 15px; line-height: 1.68; margin: 0;">I've been using eGFR 30 as my hard stop for metformin, but I have a patient hovering around 32–35 who tolerates it well and has no GI symptoms. Curious what cutoff others are actually using in practice versus what the label says — do you dose-reduce first or hold entirely at 3b?</p>
+      </div>
+
+      <sc-for list="{{ replies }}" as="reply" hint-placeholder-count="3">
+        <div style="padding: 22px 0; border-bottom: 1px solid #E9ECEF;">
+          <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #F0F2F4; color: #5B6572; font-size: 13px; font-weight: 700; display: flex; align-items: center; justify-content: center;">{{ reply.initials }}</div>
+            <div style="line-height: 1.3;"><div style="font-weight: 700; font-size: 14px;">{{ reply.author }}</div><div style="font-size: 12px; color: #9AA3AC;">{{ reply.time }}</div></div>
+          </div>
+          <p style="font-size: 15px; line-height: 1.68; margin: 0;">{{ reply.body }}</p>
+        </div>
+      </sc-for>
+
+      <div style="margin-top: 30px;">
+        <textarea placeholder="Share your clinical experience…" rows="4" style="width: 100%; border: 1px solid #DDE1E4; border-radius: 10px; padding: 13px 15px; font-size: 15px; font-family: Inter, sans-serif; resize: vertical; box-sizing: border-box;"></textarea>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 12px;">
+          <div style="display: flex; gap: 8px;">
+            <span style="background: #F4F6F8; border: 1px solid #E9ECEF; border-radius: 999px; padding: 5px 13px; font-size: 12px; color: #5B6572; cursor: pointer;">+ Add tag</span>
+          </div>
+          <div style="background: #0056B3; color: #FFFFFF; font-size: 14px; font-weight: 600; padding: 11px 24px; border-radius: 8px; cursor: pointer;">Post Reply</div>
+        </div>
+      </div>
+    </section>
+  </sc-if>
+
+  </main>
+
+  <footer style="border-top: 1px solid #E9ECEF; padding: 28px 40px; text-align: center; background: #FAFBFC;">
+    <div style="display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px;">
+      <svg width="27" height="27" viewBox="0 0 40 40" fill="none" style="flex-shrink: 0;">
+        <defs><linearGradient id="ahg-ftr" x1="0" y1="0" x2="40" y2="40" gradientUnits="userSpaceOnUse"><stop stop-color="#2E8BF0"/><stop offset="1" stop-color="#0052AD"/></linearGradient></defs>
+        <rect width="40" height="40" rx="11" fill="url(#ahg-ftr)"/>
+        <path d="M20 8.5 L29.5 31.5 M20 8.5 L10.5 31.5" stroke="#FFFFFF" stroke-width="3.2" stroke-linecap="round"/>
+        <path d="M13.6 23.4 H16.4 L18.2 19.6 L21 27 L22.8 23.4 H26.4" stroke="#FFFFFF" stroke-width="2.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+      <span style="font-weight: 800; font-size: 14px; color: #0A2540;">Attending<span style="color: #0056B3; font-weight: 700;"> Health</span></span>
+    </div>
+    <p style="font-size: 12px; color: #9AA3AC; margin: 0;">Attending is a fictional demo product. Content shown is invented for design purposes and is not medical advice.</p>
+  </footer>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    view: 'home',
+    gated: true,
+    treatmentExpanded: false,
+    pregnantAnswer: null,
+    calcAge: 68,
+    calcWeight: 82,
+    calcCreatinine: 1.3,
+    calcSex: 'M'
+  };
+
+  renderVals() {
+    const s = this.state;
+    const crcl = ((140 - Number(s.calcAge)) * Number(s.calcWeight)) / (72 * Number(s.calcCreatinine)) * (s.calcSex === 'F' ? 0.85 : 1);
+    const crclValue = isFinite(crcl) && crcl > 0 ? crcl.toFixed(0) : '—';
+
+    const pregnantPanelText = s.pregnantAnswer === 'yes'
+      ? 'Avoid SGLT2 inhibitors and GLP-1 agonists; insulin remains the preferred agent for glycemic control during pregnancy.'
+      : s.pregnantAnswer === 'no'
+      ? 'Standard first-line pathway applies — proceed with metformin plus lifestyle intervention as outlined above.'
+      : '';
+
+    return {
+      view: s.view,
+      isHome: s.view === 'home',
+      isArticle: s.view === 'article',
+      isForum: s.view === 'forum',
+      goHome: () => this.setState({ view: 'home' }),
+      goArticle: () => this.setState({ view: 'article' }),
+      goForum: () => this.setState({ view: 'forum' }),
+      gated: s.gated,
+      notGated: !s.gated,
+      unlockArticle: () => this.setState({ gated: false }),
+      relockArticle: () => this.setState({ gated: true }),
+      navArticleColor: s.view === 'article' ? '#0056B3' : '#1A1A1A',
+      navForumColor: s.view === 'forum' ? '#0056B3' : '#1A1A1A',
+
+      treatmentExpanded: s.treatmentExpanded,
+      treatmentToggleLabel: s.treatmentExpanded ? 'Hide pathophysiology & evidence' : 'Expand for pathophysiology & evidence',
+      toggleTreatment: () => this.setState(st => ({ treatmentExpanded: !st.treatmentExpanded })),
+
+      calcAge: s.calcAge,
+      calcWeight: s.calcWeight,
+      calcCreatinine: s.calcCreatinine,
+      calcSex: s.calcSex,
+      setCalcAge: (e) => this.setState({ calcAge: e.target.value }),
+      setCalcWeight: (e) => this.setState({ calcWeight: e.target.value }),
+      setCalcCreatinine: (e) => this.setState({ calcCreatinine: e.target.value }),
+      setCalcSex: (e) => this.setState({ calcSex: e.target.value }),
+      crclValue,
+      showRenalCaution: isFinite(crcl) && crcl > 0 && crcl < 45,
+
+      pregnantAnswer: s.pregnantAnswer,
+      setPregnantYes: () => this.setState({ pregnantAnswer: 'yes' }),
+      setPregnantNo: () => this.setState({ pregnantAnswer: 'no' }),
+      showPregnantPanel: !!s.pregnantAnswer,
+      pregnantPanelText,
+      yesBorderColor: s.pregnantAnswer === 'yes' ? '#0056B3' : '#DDE1E4',
+      yesBg: s.pregnantAnswer === 'yes' ? '#EAF2FB' : '#FFFFFF',
+      yesColor: s.pregnantAnswer === 'yes' ? '#0056B3' : '#1A1A1A',
+      noBorderColor: s.pregnantAnswer === 'no' ? '#0056B3' : '#DDE1E4',
+      noBg: s.pregnantAnswer === 'no' ? '#EAF2FB' : '#FFFFFF',
+      noColor: s.pregnantAnswer === 'no' ? '#0056B3' : '#1A1A1A',
+
+      specialtyTags: ['Cardiology', 'Endocrinology', 'Infectious Disease', 'Nephrology', 'Psychiatry', 'Pharmacology'],
+      trendingTopics: [
+        { tag: 'Endocrinology', img: 'clinical photo', title: 'GLP-1 Agonists: Updated Dosing Ladder for 2026', desc: 'Titration schedules and switch strategies across the newest agents.', meta: 'By A. Okafor, MD · 6 min read · Updated Jul 12' },
+        { tag: 'Cardiology', img: 'clinical photo', title: 'Resistant Hypertension: A Stepwise Diagnostic Approach', desc: 'Ruling out secondary causes before adding a fourth agent.', meta: 'By L. Fischer, MD · 8 min read · Updated Jul 9' },
+        { tag: 'Infectious Disease', img: 'clinical photo', title: 'Empiric Antibiotics in Febrile Neutropenia', desc: 'Risk-stratifying inpatient vs. outpatient management.', meta: 'By R. Bianchi, MD · 5 min read · Updated Jul 14' }
+      ],
+      editorFeatures: [
+        { img: 'editorial photo — clinicians', title: 'How obesity complicates medication dosing: two critical scenarios', desc: 'As prevalence rises, clinicians need clarity on safe and effective therapy for this patient population.' },
+        { img: 'editorial photo — consultation', title: 'Top four challenges clinicians face when treating global patients', desc: 'With fewer borders in care, teams must address differences in culture, language, and available medications.' }
+      ],
+      recentDiscussions: [
+        { tag: 'Pharmacology', title: "Metformin dosing threshold in CKD stage 3b — what's your cutoff?", replies: 14, activity: 'active 2h ago' },
+        { tag: 'Cardiology', title: 'Anticoagulation bridging before elective surgery — real-world practice', replies: 9, activity: 'active 5h ago' },
+        { tag: 'Psychiatry', title: 'SSRIs and QTc — how much do you actually monitor?', replies: 21, activity: 'active 1d ago' }
+      ],
+      replies: [
+        { author: 'D. Nwosu, MD', initials: 'DN', time: '1 day ago', body: "I hold entirely below eGFR 30 but will dose-reduce to 500mg BID between 30-45 if tolerating well and lactate is normal. Haven't seen an issue in years of practice this way." },
+        { author: 'T. Alvarez, PharmD', initials: 'TA', time: '18 hours ago', body: 'Worth flagging that the FDA label cutoff and most nephrology consensus statements diverge here — I lean toward the more conservative eGFR 45 threshold for new starts, higher tolerance for continuing existing therapy.' },
+        { author: 'K. Ramirez, MD', initials: 'KR', time: '2 hours ago', body: "That's helpful — I'll continue at reduced dose with closer lactate monitoring rather than switching agents outright." }
+      ]
+    };
+  }
+}
+
+</script>
+</body>
+</html>
